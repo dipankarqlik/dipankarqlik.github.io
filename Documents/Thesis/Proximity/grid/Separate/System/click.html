@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+  <style>
+      svg {
+  border: 1px solid #ccc;
+}
+
+.clickable-circle.highlighted {
+  stroke: #333;
+  stroke-width: 3;
+}
+  </style>
+</head>
+<body>
+<script>
+    var dispatch = d3.dispatch('unhighlightAll','toggleSingle')
+  .on('unhighlightAll', function() {
+    d3.selectAll('.clickable-circle').classed('highlighted', false);
+  })
+  .on('toggleSingle', function(el) {
+    d3.select(el).classed('highlighted', function() {
+      return !d3.select(el).classed('highlighted');
+    });
+  });
+
+var colors = d3.scale.category20();
+
+var svg = d3.select('body').append('svg')
+  .attr('width', 400)
+  .attr('height', 300)
+  .on('click', function() {
+    if (d3.select(d3.event.target).classed('clickable-circle')) {
+      return;
+    } else {
+      dispatch.unhighlightAll();
+    }
+  });
+
+var circles = svg.selectAll('tom')
+  .data(d3.range(8))
+  .enter().append('circle')
+    .attr('class', 'clickable-circle')
+    .attr('cx', function(d,i) {return 60 + i * 40;})
+    .attr('cy', 150)
+    .attr('r', 16)
+    .attr('fill', function(d,i){return colors(i);})
+    .on('click', function() {
+      dispatch.toggleSingle(this);
+    });
+</script>
+</body>
+</html>
