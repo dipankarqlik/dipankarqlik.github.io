@@ -1,1 +1,131 @@
-Hello World
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Nolan Dey">
+    <meta name="author" content="Nolan Dey">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="img/favicon.ico" rel="icon" type="image/x-icon" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+<!--     <link rel="stylesheet" href="css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="css/style.css">
+    <title>Nolan Dey</title>
+</head>
+
+<body class="custom-body">
+    <div class="section" id="about-me">
+      <div class='section-container'>
+        <div class="portrait-container">
+            <img class="portrait" src="img/paris_headshot.png">
+            <div class="title">Nolan Dey</div>
+        </div>
+        <div class='bio'>
+          <p>I am a MASc student in Systems Design Engineering at the University of Waterloo, where I am supervised by <a href='https://uwaterloo.ca/systems-design-engineering/profile/bptripp' target='_blank'>Bryan Tripp</a>, <a href='https://www.gwtaylor.ca' target='_blank'>Graham Taylor</a>, and <a href='https://www.eng.uwaterloo.ca/~a28wong/' target='_blank'>Alexander Wong</a>. My research has focused on developing techniques to understand/explain the activation space of deep neural networks. Some of my research interests include neural network explainability, biologically-inspired deep learning, generative modelling, and understanding why deep networks generalize. I also run a <a href='https://ndey96.github.io/deep-learning-paper-club/' target='_blank'>Deep Learning Reading Club</a>.</p>
+          <p>I completed my BASc in Systems Design Engineering at the University of Waterloo, where I completed machine learning internships at <a href='https://www.mindfoundry.ai' target='_blank'>Mind Foundry</a>, <a href='https://www.apple.com' target='_blank'>Apple</a>, and <a href='https://www.capitalone.com' target='_blank'>Capital One</a> and software engineering interships at <a href='https://www.parabol.co' target='_blank'>Parabol</a>, <a href='https://connected.io' target='_blank'>Connected</a>, and <a href='https://www.kik.com' target='_blank'>Kik</a>.</p>
+        </div>
+        <div class='links'><a href="mailto:nsdey@uwaterloo.ca" target="_blank">nsdey@uwaterloo.ca</a>  /  <a href="cv.pdf" target="_blank" type="application/pdf">CV</a>  /  <a href="https://scholar.google.com/citations?user=JHUfMr0AAAAJ&hl=en" target="_blank">Scholar</a>  /  <a href="https://github.com/ndey96" target="_blank">GitHub</a>  /  <a href="http://www.linkedin.com/in/nolandey" target="_blank">LinkedIn</a>  /  <a href="https://medium.com/@nolandey" target="_blank">Medium</a></div>
+      </div>
+    </div>
+    <!-- Research -->
+<div class="section" id="projects">
+    <div class='section-container'>
+    <div class="section-title projects-section-title" id="projects">Research</div>
+    <div class="projects">
+        <div class="project">
+            <div class="project-image">
+                <img src="img/dtd.png">
+                <!-- <img src="img/svrhm.png"> -->
+            </div>
+            <div class="project-text">
+                <div class="project-title">Identifying and interpreting tuning dimensions in deep networks</div>
+                <div class="project-venue">Shared Visual Representations in Human & Machine Intelligence NeurIPS Workshop, 2020</div>
+                <div class="project-authors">Nolan S. Dey, J. Eric Taylor, Bryan P. Tripp, Alexander Wong, Graham W. Taylor</div>
+                <div class="project-links"><a href='https://arxiv.org/abs/2011.03043' target="_blank">[Paper]</a> <a href='https://tinyurl.com/tuning-dimensions-svrhm' target="_blank">[Colab Demo]</a></div>
+            </div>
+        </div>
+        <div class="project">
+            <div class="project-image">
+                <img src="img/grasping.png">
+            </div>
+            <div class="project-text">
+                <div class="project-title">37,000 Human-Planned Robotic Grasps With Six Degrees of Freedom</div>
+                <div class="project-venue">IEEE Robotics and Automation Letters, 2020</div>
+                <div class="project-authors">Victor R. Osorio, Rajan Iyengar, Xueyang Yao, Preshish Bhattachan, Adrian Ragobar, Nolan S. Dey, Bryan Tripp</div>
+                <div class="project-links"><a href='https://ieeexplore.ieee.org/document/9013061' target="_blank">[Paper]</a></div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- Projects -->
+    <div class="section" id="projects">
+    <div class='section-container'>
+    <div class="section-title projects-section-title" id="projects">Projects</div>
+    <div class="projects">
+        <div class="project">
+            <div class="project-image">
+                <img src="img/spiking-actor-critic.png">
+            </div>
+            <div class="project-text">
+                <div class="project-title">Actor-Critic RL using Spiking Neurons</div>
+                <div class="project-authors">Nolan S. Dey</div>
+                <div class="project-description">
+                    <p>Released the only open-source implementation of “Reinforcement Learning Using a Continuous Time Actor-Critic Framework with Spiking Neurons” by Frémaux et al. using Nengo and OpenAI Gym</p>
+                </div>
+                <div class="project-links"><a href='https://github.com/ndey96/spiking-actor-critic' target="_blank">[GitHub]</a> <a href='https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003024' target="_blank">[Original paper]</a></div>
+            </div>
+        </div>
+        <div class="project">
+            <div class="project-image">
+                <img src="img/dgn.png">
+            </div>
+            <div class="project-text">
+                <div class="project-title">Synthesizing Preferred Inputs for Deep Neurons via GANs</div>
+                <div class="project-authors">Nolan S. Dey*, Nick Torenvliet*, Austin Kothig*</div>
+                <div class="project-description">
+                    <p>Released an open-source PyTorch implementation (originally Caffe 1.X) of “Synthesizing the preferred inputs for neurons in neural networks via deep generator networks” by Nguyen et al.</p>
+                </div>
+                <div class="project-links"><a href='https://github.com/ndey96/deep-generator-network' target="_blank">[GitHub]</a> <a href='https://papers.nips.cc/paper/6519-synthesizing-the-preferred-inputs-for-neurons-in-neural-networks-via-deep-generator-networks.pdf' target="_blank">[Original paper]</a> <a href='https://github.com/Evolving-AI-Lab/synthesizing' target="_blank">[Original implementation]</a></div>
+            </div>
+        </div>
+        <div class="project">
+            <div class="project-image">
+                <img src="img/gcnn.png">
+            </div>
+            <div class="project-text">
+                <div class="project-title">Graph Convolutional Neural Network Explainability</div>
+                <div class="project-authors">Nolan S. Dey</div>
+                <div class="project-description">
+                    <p>Released the only open-source implementation of “Explainability Methods for Graph Convolutional Neural Networks” by Pope & Kolouri et al. using PyTorch-Geometric and RDKit</p>
+                </div>
+                <div class="project-links"><a href='https://github.com/ndey96/GCNN-Explainability' target="_blank">[GitHub]</a> <a href='https://openaccess.thecvf.com/content_CVPR_2019/papers/Pope_Explainability_Methods_for_Graph_Convolutional_Neural_Networks_CVPR_2019_paper.pdf' target="_blank">[Original paper]</a></div>
+            </div>
+        </div>
+        <div class="project">
+            <div class="project-image">
+                <img src="img/survey.png">
+            </div>
+            <div class="project-text">
+                <div class="project-title">SYDE 2019 Class Survey</div>
+                <div class="project-authors">Nolan S. Dey, Jason Manson-Hing</div>
+                <div class="project-description">
+                    <p>Surveyed 55 respondents from my undergraduate class with questions related to demographics, academics, internships, lifestyle, and post-graduation plans. Published a detailed analysis of the survey results with 109 graphs and open-sourced my code to help future classes conduct similar surveys</p>
+                </div>
+                <div class="project-links"><a href='https://ndey96.github.io/syde_2019_class_profile.pdf' target="_blank">[SYDE 2019 Class Profile]</a> <a href='https://github.com/ndey96/SYDE-Survey' target="_blank">[GitHub]</a></div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <script src="js/jquery-2.2.4.min.js"></script>
+    <script src="js/jquery.scrollTo.min.js"></script>
+    <script src="js/scrollTo.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>
