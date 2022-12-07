@@ -1,0 +1,137 @@
+:root {
+	--secondary-color: black;
+	--primary-color: white;
+};
+
+body {
+	margin: 0;
+	padding: 50px 0 0 0;
+	width: 100%;
+	font-weight: 500;
+	font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+	background-color: var(--primary-color);
+}
+html {background-color: var(--primary-color)}
+
+.section {
+	background-color: var(--primary-color);
+	/*padding: 30px 0 0 0;*/
+}
+
+.section-container {
+	width: 75%;
+	margin: 0 auto;
+}
+
+.portrait-container {
+	text-align: center;
+	margin: 30px 0;
+}
+
+.portrait-container img {
+	width: 170px;
+	text-align: center;
+	display: inline-block;
+	margin: auto 0;
+}
+
+.title {
+	display: inline-block;
+	font-size: 69px;
+	font-weight: 500;
+	color: var(--secondary-color);
+	vertical-align: middle;
+	padding-left: 18px;
+}
+
+.bio {
+	font-size: 24px;
+	font-weight: 400;
+	text-align: center;
+	color: var(--secondary-color);
+	margin-bottom: 30px;
+}
+
+.links {
+	font-size: 24px;
+	font-weight: 400;
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.section-title {
+	font-weight: 400;
+	font-size: 48px;
+	padding:20px;
+	color: black;
+	text-align: center;
+}
+
+.project {
+	margin-top: 30px;
+	display: inline-flex;
+}
+
+.project-image {
+	display: inline-block;
+	margin-right: 30px;
+	text-align: center;
+	/*width: 20%;*/
+	width: 200px;
+}
+
+.project-image img {
+	/*width: 170px;*/
+	width: 100%;
+	/*max-height: 170px;*/
+}
+
+.project-text {
+	display: inline-block;
+	width: 75%;
+	margin-left: 20px;
+}
+
+.project-title {
+	font-size: 32px;
+	font-weight: 400;
+}
+
+.project-description {
+	font-size: 24px;
+	font-weight: 400;
+	margin-top: 12px;
+}
+
+.project-venue {
+	font-size: 24px;
+	font-weight: 500;
+}
+
+.project-authors {
+	font-size: 24px;
+	font-weight: 400;
+}
+
+.project-links {
+	font-size: 24px;
+	font-weight: 400;
+}
+
+
+.projects {
+	/*display: inline-table;*/
+	padding-bottom: 30px;
+}
+
+@media screen and (max-width: 700px) {
+	.project-image {
+		width: unset;
+		min-width: 50%;
+		max-width: 50%;
+	}
+
+	/*.project-image img{
+		max-width: 50%;
+	}*/
+}
