@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>SANKEY Static Sankey Visualization</title>
+<style>
+	.node rect {
+	  cursor: move;
+	  fill-opacity: .9;
+	  shape-rendering: crispEdges;
+	}
+	.node text {
+	  pointer-events: none;
+	  text-shadow: 0 1px 0 #fff;
+	}
+	.link {
+	  fill: none;
+	  stroke: #000;
+	  stroke-opacity: .2;
+	}
+	.link:hover {
+	  stroke-opacity: .5;
+	}
+	.axis path,
+	.axis line{
+	  fill: none;
+	  stroke: black;
+	}
+	
+	#A{
+	  fill: none;
+	  stroke: rgb(15, 58, 88);
+	  stroke-width: 5px;
+	}
+	
+	#B{
+	  fill: none;
+	  stroke: rgb(85, 97, 113);
+	  stroke-width: 5px;
+	}
+	
+	#C{
+	  fill: none;
+	  stroke: rgb(124, 62, 6);
+	  stroke-width: 5px;
+	}
+	.tick text{
+	  font-size: 12px;
+	}
+	.tick line{
+	  opacity: 0.2;
+	}
+</style>
+<body>
+
+<p id="chartSankey"></p>
+<p id="chartLine"></p>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="https://rawgit.com/d3/d3-plugins/master/sankey/sankey.js"></script>
+
+<script> 
+// ## Datasets for Sankey visualization
+var graph = 
+	{
+	"nodes":[
+	{"node":0,"name":"A"},
+	{"node":1,"name":"B"},
+	{"node":2,"name":"C"},
+	{"node":3,"name":"D"},
+	{"node":4,"name":"E"},
+	{"node":4,"name":"F"}
+	],
+	"links":[
+	{"source":0,"target":3,"value":200},
+	{"source":0,"target":4,"value":300},
+	{"source":0,"target":5,"value":500},
+	{"source":1,"target":3,"value":400},
+	{"source":1,"target":4,"value":600},
+	{"source":1,"target":5,"value":1000},
+	{"source":2,"target":3,"value":600},
+	{"source":2,"target":4,"value":900},
+	{"source":2,"target":5,"value":1500}
+	]};
+// ## Datasets for linechart	
+var dataset = [
+  {x: 0, y: 0},
+  {x: 1, y: 28},
+  {x: 2, y: 131},
+  {x: 3, y: 152},
+  {x: 4, y: 187},
+  {x: 5, y: 245},
+  {x: 6, y: 345},
+  {x: 7, y: 481},
+  {x: 8, y: 559},
+  {x: 9, y: 632},
+  {x: 10, y: 820},
+  {x: 11, y: 800},
+  {x: 12, y: 1000}
+];
+var dataset2 = [
+  {x: 0, y: 0},
+  {x: 1, y: 74},
+  {x: 2, y: 174},
+  {x: 3, y: 393},
+  {x: 4, y: 593},
+  {x: 5, y: 814},
+  {x: 6, y: 1038},
+  {x: 7, y: 1276},
+  {x: 8, y: 1529},
+  {x: 9, y: 1756},
+  {x: 10, y: 1860},
+  {x: 11, y: 1900},
+  {x: 12, y: 2000}
+];
+var dataset3 = [
+  {x: 0, y: 0},
+  {x: 1, y: 95},
+  {x: 2, y: 295},
+  {x: 3, y: 406},
+  {x: 4, y: 518},
+  {x: 5, y: 869},
+  {x: 6, y: 1282},
+  {x: 7, y: 1403},
+  {x: 8, y: 1504},
+  {x: 9, y: 1840},
+  {x: 10, y: 2050},
+  {x: 11, y: 2500},
+  {x: 12, y: 3000}
+];
+	
+</script>
+
+<script>
+// ## Original source for Sankey https://gist.github.com/d3noob/c2637e28b79fb3bfea13
+// ## Option to move nodes eliminated
+// ## Order of nodes disabled on sankey.js (//nodes.sort(ascendingDepth);) to maintain the order of data, which is alphabetical and prevent for the nodes to be ordered by size 
+// ## Codigo inicial adquirido para el Sankey https://gist.github.com/d3noob/c2637e28b79fb3bfea13
+// ## La posibilidad de mover los nodos se ha eliminado
+// ## La ordenacion en el archivo sankey.js se ha desbilitado (//nodes.sort(ascendingDepth);) para mantener el ordenen de los datos y evitar que los nodos se ordenen por tama~o 
+var units = "$";
+var margin = {top: 10, right: 10, bottom: 40, left: 20},
+    width = 700 - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom;
+var formatNumber = d3.format(",.0f"),    // zero decimal places
+    format = function(d) { return formatNumber(d) + " " + units; },
+    color = d3.scale.category20();
+// append the svg canvas to the page
+var svg = d3.select("#chartSankey").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", 
+          "translate(" + margin.left + "," + margin.top + ")");
+// Set the sankey diagram properties
+var sankey = d3.sankey()
+    .nodeWidth(36)
+    .nodePadding(40)
+    .size([width, height]);
+var path = sankey.link();
+  sankey
+      .nodes(graph.nodes)
+      .links(graph.links)
+      .layout(32);
+// add in the links
+  var link = svg.append("g").selectAll(".link")
+      .data(graph.links)
+    .enter().append("path")
+      .attr("class", function(d){
+         return "link " + d.source.name;
+      })
+      .attr("d", path)
+      .style("stroke-width", function(d) { return Math.max(1, d.dy); })
+      .sort(function(a, b) { return b.dy - a.dy; })
+      .on("mouseover", function(d){
+        var s = d.source.name;
+        console.log(s)
+        d3.selectAll(".line").style('opacity', .1);
+        d3.select("#" + s).style('opacity',  1);
+      })
+      .on("mouseout", function(d){
+        d3.selectAll(".line").style('opacity', 1);
+      });
+      
+      
+      
+// add the link titles
+  link.append("title")
+        .text(function(d) {
+    		return d.source.name + " → " + 
+                d.target.name + "\n" + format(d.value); });
+// add in the nodes
+  var node = svg.append("g").selectAll(".node")
+      .data(graph.nodes)
+    .enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) { 
+		  return "translate(" + d.x + "," + d.y + ")"; })
+// add the rectangles for the nodes
+  node.append("rect")
+      .attr("height", function(d) { return d.dy; })
+      .attr("width", sankey.nodeWidth())
+      .style("fill", function(d) { 
+		  return d.color = color(d.name.replace(/ .*/, "")); })
+      .style("stroke", function(d) { 
+		  return d3.rgb(d.color).darker(2); })
+		  .on("mouseover", function(d){
+        var s = d.name;
+        d3.selectAll(".line").style('opacity', .1);
+        d3.select("#" + s).style('opacity',  1);
+      })
+      .on("mouseout", function(d){
+        d3.selectAll(".line").style('opacity', 1);
+      });
+		  
+    node.append("title")
+      .text(function(d) { 
+		  return d.name + "\n" + format(d.value); });
+// add in the title for the nodes
+  node.append("text")
+      .attr("x", -6)
+      .attr("y", function(d) { return d.dy / 2; })
+      .attr("dy", ".35em")
+      .attr("text-anchor", "end")
+      .attr("transform", null)
+      .text(function(d) { return d.name; })
+    .filter(function(d) { return d.x < width / 2; })
+      .attr("x", 6 + sankey.nodeWidth())
+      .attr("text-anchor", "start");
+	  
+</script>
+
+<script>
+var margin = {top: 10, right: 10, bottom: 40, left: 40},
+    width = 700 - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom;
+	
+var xScale = d3.scale.linear()
+    .domain([0, d3.max(dataset3, function(d){ return d.x; })])
+    .range([0, width]);
+var yScale = d3.scale.linear()
+    .domain([0, d3.max(dataset3, function(d){ return d.y; })])
+    .range([height, 0]);
+var xAxis = d3.svg.axis()
+    .scale(xScale)
+    .tickSize(-height);
+var yAxis = d3.svg.axis()
+    .scale(yScale)
+	.orient("left")
+    .ticks(10);
+	
+var line = d3.svg.line()
+    .x(function(d) { return xScale(d.x); })
+    .y(function(d) { return yScale(d.y); });
+	
+var line2 = d3.svg.line()
+    .x(function(d) { return xScale(d.x); })
+    .y(function(d) { return yScale(d.y); });
+var line2 = d3.svg.line()
+    .x(function(d) { return xScale(d.x); })
+    .y(function(d) { return yScale(d.y); });
+	
+var svg = d3.select("#chartLine").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+  svg.append("path")
+      .data([dataset])
+      .attr("class", "line")
+      .attr("d", line)
+      .attr("id", "A")
+      .on("mouseover", highlight)
+      .on("mouseout", function(){ d3.selectAll(".link").style('opacity', 1);   });
+  svg.append("path")
+      .data([dataset2])
+      .attr("class", "line")
+      .attr("d", line)
+      .attr("id", "B")
+      .on("mouseover", highlight)
+      .on("mouseout", function(){ d3.selectAll(".link").style('opacity', 1);   });
+  svg.append("path")
+      .data([dataset3])
+      .attr("class", "line")
+      .attr("d", line)
+      .attr("id", "C")
+      .on("mouseover", highlight)
+      .on("mouseout", function(){ d3.selectAll(".link").style('opacity', 1);   });
+      
+  function highlight(){
+    var id = this.id;
+    d3.selectAll(".link").style('opacity', 0.1);
+    d3.selectAll("." + id).style('opacity', 1);
+  }
+	  
+</script>
+
+</body>
+</html>
